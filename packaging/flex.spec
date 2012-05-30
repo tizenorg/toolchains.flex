@@ -10,6 +10,7 @@ Summary:        A tool for creating scanners (text pattern recognizers)
 Url:            http://flex.sourceforge.net/
 Group:          Development/Tools
 Source:         http://prdownloads.sourceforge.net/flex/flex-%{version}.tar.bz2
+Source1001: packaging/flex.manifest 
 Patch0:         flex-2.5.35-sign.patch
 # borrowed from fc12
 Patch1:         flex-2.5.35-hardening.patch
@@ -39,6 +40,7 @@ application development.
 %patch2 -p1
 
 %build
+cp %{SOURCE1001} .
 %configure --disable-dependency-tracking CFLAGS="-fPIC %{optflags}" --disable-nls
 make %{?_smp_mflags}
 
@@ -65,6 +67,7 @@ echo ============END TESTING===========
 rm -rf %{buildroot}
 
 %files 
+%manifest flex.manifest
 %defattr(-,root,root)
 %doc COPYING
 %{_bindir}/*
