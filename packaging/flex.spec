@@ -1,7 +1,3 @@
-#
-# Please submit bugfixes or comments via http://bugs.meego.com/
-#
-
 Name:           flex
 Version:        2.5.35
 Release:        2
@@ -10,7 +6,7 @@ Summary:        A tool for creating scanners (text pattern recognizers)
 Url:            http://flex.sourceforge.net/
 Group:          Development/Tools
 Source:         http://prdownloads.sourceforge.net/flex/flex-%{version}.tar.bz2
-Source1001: packaging/flex.manifest 
+Source1001:     flex.manifest 
 Patch0:         flex-2.5.35-sign.patch
 # borrowed from fc12
 Patch1:         flex-2.5.35-hardening.patch
@@ -45,33 +41,21 @@ cp %{SOURCE1001} .
 make %{?_smp_mflags}
 
 %install
-%make_install
+make install DESTDIR=%{buildroot}
 rm -f %{buildroot}/%{_infodir}/*
 
 ( cd %{buildroot}
   ln -sf flex .%{_bindir}/lex
   ln -sf flex .%{_bindir}/flex++
-  ln -s flex.1 .%{_mandir}/man1/lex.1
-  ln -s flex.1 .%{_mandir}/man1/flex++.1
   ln -s libfl.a .%{_libdir}/libl.a
 )
 
-%check
-%if0
-echo ============TESTING===============
-make check
-echo ============END TESTING===========
-%endif
-
-%clean
-rm -rf %{buildroot}
+%remove_docs
 
 %files 
 %manifest flex.manifest
-%defattr(-,root,root)
 %doc COPYING
 %{_bindir}/*
-%doc %{_mandir}/man1/*
 %{_libdir}/*.a
 %{_includedir}/FlexLexer.h
 
