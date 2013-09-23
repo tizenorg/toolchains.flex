@@ -43,6 +43,9 @@ make %{?_smp_mflags}
 %install
 make install DESTDIR=%{buildroot}
 rm -f %{buildroot}/%{_infodir}/*
+# license
+mkdir -p %{buildroot}/usr/share/license
+cp COPYING %{buildroot}/usr/share/license/%{name}
 
 ( cd %{buildroot}
   ln -sf flex .%{_bindir}/lex
@@ -58,5 +61,4 @@ rm -f %{buildroot}/%{_infodir}/*
 %{_bindir}/*
 %{_libdir}/*.a
 %{_includedir}/FlexLexer.h
-
-
+/usr/share/license/%{name}
