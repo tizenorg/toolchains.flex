@@ -1,6 +1,6 @@
 Name:           flex
 Version:        2.5.35
-Release:        2
+Release:        3
 License:        BSD
 Summary:        A tool for creating scanners (text pattern recognizers)
 Url:            http://flex.sourceforge.net/
@@ -58,4 +58,5 @@ rm -f %{buildroot}/%{_infodir}/*
 %{_bindir}/*
 %{_libdir}/*.a
 %{_includedir}/FlexLexer.h
+
 
